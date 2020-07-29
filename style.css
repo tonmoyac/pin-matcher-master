@@ -32,7 +32,7 @@ body {
     box-shadow: none;
 }
 
-input[type='text']{
+input[type='number']{
     background-color: #3D4153;
     padding: 10px 0px;
     width: 80%;
@@ -41,9 +41,14 @@ input[type='text']{
     height: 50px;
     padding: 10px;
 }
-input[type='text']:focus {
+.all-input{
+    text-align: right;
+    color: white;
+    font-size: 20px;
+}
+input[type='number']:focus {
     background-color: #3D4153;
-    color: #fff;
+    color: white;
     font-size: 20px;
 }
 .numbers {
@@ -94,6 +99,13 @@ color: #E0B612;
     margin-top: 20px;
     border-radius: 15px;
     padding: 5px 20px;
+    ;
+}
+#match{
+    display: none;
+}
+#not-match{
+    display: none;
 }
 .notify-section{
     width: 35%;
