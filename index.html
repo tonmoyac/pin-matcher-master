@@ -12,7 +12,7 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="pin-generator half-width">
-                    <input class="form-control all-input" id="generated-pin" type="text">
+                    <input class="form-control all-input" id="generate-pin" type="text">
                     <button class="generate-btn" id="pin-generator-btn">Generate Pin</button>
                 </div>
             </div>
@@ -43,7 +43,7 @@
                             </div>
                             <div>
                                 <button type="submit" class="submit-btn" id="submit">Submit</button>
-                                <p class="action-left"><span id="try">3</span>  try left</p>
+                                <p class="action-left"><span id="try-count">3</span>  try left</p>
                             </div>
                     </div>
                 </div>
@@ -56,99 +56,101 @@
     </div>
 
 <script>
+    // Pin Generator
     const pinGeneratorBtn = document.getElementById("pin-generator-btn");
         pinGeneratorBtn.addEventListener("click", function(){
             const generatedPin = Math.floor(1000 + Math.random() * 9000);
-                document.getElementById("generated-pin").value = generatedPin;
-
+                document.getElementById("generate-pin").value = generatedPin;
     })
 
-    var submitNumber = document.getElementsByClassName("number")
-    for(var i =0; i<submitNumber.length; i++){
-        submitNumber[i].addEventListener("click", function(){
-            var vv = this.innerText;
-            var pinSubmitNumber = parseFloat(vv);
-            document.getElementById("input-pin").value += pinSubmitNumber;
-            return;
-        })
+    // Input Number Digit
+    const number = document.getElementsByClassName("number")
+        for(var i =0; i<number.length; i++){
+            number[i].addEventListener("click", function(){
+                const inputNumberDigit = this.innerText;
+                const pinSubmitNumber = parseFloat(inputNumberDigit);
+                document.getElementById("input-pin").value += pinSubmitNumber;
+                return;
+            })
     }
-
-
+    // Clear Button
     const clear = document.getElementById("clear");
         clear.addEventListener("click", function(){
           document.getElementById("input-pin").value= "";
-
     })
 
-    const backspace2 = document.getElementById("backspace");
-    backspace2.addEventListener("click", function(){
-         var back = document.getElementById("input-pin").value;
-        var jjjj = back.substr(0,back.length - 1);
-         document.getElementById("input-pin").value = jjjj;
-        
-    })
+    // Backspace Button
+    const backSpace = document.getElementById("backspace");
+        backSpace.addEventListener("click", function(){
 
-const submit = document.getElementById("submit");
-submit.addEventListener("click", function(){
-    var generatedPin = document.getElementById("generated-pin").value;
-    var inputedPin = document.getElementById("input-pin").value;
+            const inputPin = document.getElementById("input-pin").value;
+            const backSpaceNumber = inputPin.substr(0,inputPin.length - 1);
+            document.getElementById("input-pin").value = backSpaceNumber;
+            
+        })
+    // When Click Submit Button
+    const submit = document.getElementById("submit");
+        submit.addEventListener("click", function(){
+                const generatedPin = document.getElementById("generate-pin").value;
+                const inputPin = document.getElementById("input-pin").value;
 
-  function pinMatching(displayBlock, displayNone){
-        var display1 = document.getElementById(displayBlock);
-        display1.style.display= "block"
-        var hide = document.getElementById(displayNone);
-        hide.style.display= "none";
+    // Function For After Submited Pin, Showing The Result
+            function pinMatching(displayBlock, displayNone){
+                const blockResult = document.getElementById(displayBlock);
+                blockResult.style.display= "block"
 
-        }
-    // In case of generatedPin & inputPin value is 0 calling this function.
-    function notify(notifySection){
-        var notify = document.getElementById(notifySection);
-        notify.style.display= "none";  
-    }
+                const hideOtherNotify = document.getElementById(displayNone);
+                hideOtherNotify.style.display= "none";
+            }
 
-    if(generatedPin === inputedPin){
-        pinMatching("match", "not-match");
+        //Function for In case of generatedPin & inputPin value is 0.
+            function hideNotify(notifySection){
+                const notify = document.getElementById(notifySection);
+                notify.style.display= "none";  
+            }
 
-    }
-    if(generatedPin != inputedPin){
-        pinMatching("not-match", "match");
-    }
-     if(generatedPin==""&&inputedPin==""){
-        notify("notifySection");
-    alert("Please Generate Your Pin First");
-     }
-     if(inputedPin=="" &&generatedPin!=""){
-        notify("notifySection");
-     alert("Please Submit Your Generated Pin");
-     }
-     if(generatedPin=="" &&inputedPin!="" ){
-        notify("notifySection");
-    alert("Please Generate Your Pin");
-     }
+                if(generatedPin === inputPin){
+                    pinMatching("match", "not-match");
+                }
 
-     document.getElementById("generated-pin").value = '';
-     document.getElementById("input-pin").value = '';
-})
+                if(generatedPin != inputPin){
+                    pinMatching("not-match", "match");
+                }
 
-var count = 3;
-var countButton = document.getElementById("submit");
-countButton.addEventListener("click",function(){
-  count--;
-   document.getElementById("try").innerText = count;
-  var kabul = countButton.innerHTM;
-  kabul = count;
-  var kakku = parseFloat(kabul)
-  
-  if(kakku<1){
-    var kk = document.getElementById("submit");
-    kk.style.display= "none"
-  }
-  return count;
+                if(generatedPin== "" && inputPin== ""){
+                    hideNotify("notifySection");
+                    alert("Please Generate Your Pin First");
+                }
 
-})
+                if(generatedPin!= "" && inputPin== ""){
+                    hideNotify("notifySection");
+                    alert("Please Submit Your Generated Pin");
+                }
+
+                if(generatedPin== "" && inputPin!= "" ){
+                    hideNotify("notifySection");
+                    alert("Please Generate Your Pin");
+                }
+        // After Pin Matching generated Pin and input pin Clear
+                    document.getElementById("generate-pin").value = '';
+                    document.getElementById("input-pin").value = '';
+        })
+
+        let countTry = 3;
+        const countButton = document.getElementById("submit");
+        countButton.addEventListener("click",function(){
+            countTry--;
+            document.getElementById("try-count").innerText = countTry;
+
+         // Disable Submit Button
+            if(countTry<1){
+                var submitBtn = document.getElementById("submit");
+                submitBtn.style.display= "none"
+            }
+            return countTry;
+        })
 
 </script>
-
 
 </body>
 </html>
