@@ -12,13 +12,13 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="pin-generator half-width">
-                    <input class="form-control all-input" id="generated-pin" type="number">
+                    <input class="form-control all-input" id="generated-pin" type="text">
                     <button class="generate-btn" id="pin-generator-btn">Generate Pin</button>
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="input-section half-width">
-                    <input class="form-control all-input" id="input" maxlength="4" type="number">
+                    <input class="form-control all-input" id="input-pin" maxlength="4" type="text">
                     <div class="numbers">
                         <div class="calc-body">
                             <div class="calc-button-row">
@@ -59,16 +59,16 @@
     const pinGeneratorBtn = document.getElementById("pin-generator-btn");
         pinGeneratorBtn.addEventListener("click", function(){
             const generatedPin = Math.floor(1000 + Math.random() * 9000);
-            document.getElementById("generated-pin").value = generatedPin;
+                document.getElementById("generated-pin").value = generatedPin;
 
     })
 
-    var num = document.getElementsByClassName("number")
-    for(var i =0; i<num.length; i++){
-        num[i].addEventListener("click", function(){
+    var submitNumber = document.getElementsByClassName("number")
+    for(var i =0; i<submitNumber.length; i++){
+        submitNumber[i].addEventListener("click", function(){
             var vv = this.innerText;
-            var ccc = parseFloat(vv);
-            document.getElementById("input").value += ccc;
+            var pinSubmitNumber = parseFloat(vv);
+            document.getElementById("input-pin").value += pinSubmitNumber;
             return;
         })
     }
@@ -76,22 +76,22 @@
 
     const clear = document.getElementById("clear");
         clear.addEventListener("click", function(){
-          document.getElementById("input").value="";
+          document.getElementById("input-pin").value= "";
 
     })
 
     const backspace2 = document.getElementById("backspace");
     backspace2.addEventListener("click", function(){
-         var back = document.getElementById("input").value;
-        var jjjj =back.substr(0,back.length - 1);
-         document.getElementById("input").value=jjjj;
+         var back = document.getElementById("input-pin").value;
+        var jjjj = back.substr(0,back.length - 1);
+         document.getElementById("input-pin").value = jjjj;
         
     })
 
 const submit = document.getElementById("submit");
 submit.addEventListener("click", function(){
     var generatedPin = document.getElementById("generated-pin").value;
-    var inputedPin = document.getElementById("input").value;
+    var inputedPin = document.getElementById("input-pin").value;
 
   function pinMatching(displayBlock, displayNone){
         var display1 = document.getElementById(displayBlock);
@@ -125,20 +125,23 @@ submit.addEventListener("click", function(){
         notify("notifySection");
     alert("Please Generate Your Pin");
      }
+
+     document.getElementById("generated-pin").value = '';
+     document.getElementById("input-pin").value = '';
 })
 
 var count = 3;
 var countButton = document.getElementById("submit");
 countButton.addEventListener("click",function(){
   count--;
-   document.getElementById("try").innerText=count;
-  var kabul= countButton.innerHTM;
+   document.getElementById("try").innerText = count;
+  var kabul = countButton.innerHTM;
   kabul = count;
   var kakku = parseFloat(kabul)
   
   if(kakku<1){
     var kk = document.getElementById("submit");
-    kk.style.display="none"
+    kk.style.display= "none"
   }
   return count;
 
