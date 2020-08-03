@@ -101,6 +101,7 @@
 
                 const hideOtherNotify = document.getElementById(displayNone);
                 hideOtherNotify.style.display= "none";
+
             }
 
         //Function for In case of generatedPin & inputPin value is 0.
@@ -109,11 +110,11 @@
                 notify.style.display= "none";  
             }
 
-                if(generatedPin === inputPin){
+                if(generatedPin===inputPin){
                     pinMatching("match", "not-match");
                 }
 
-                if(generatedPin != inputPin){
+                if(generatedPin!=inputPin){
                     pinMatching("not-match", "match");
                 }
 
@@ -127,7 +128,7 @@
                     alert("Please Submit Your Generated Pin");
                 }
 
-                if(generatedPin== "" && inputPin!= "" ){
+                if(generatedPin== "" && inputPin!= ""){
                     hideNotify("notifySection");
                     alert("Please Generate Your Pin");
                 }
@@ -150,6 +151,9 @@
             return countTry;
         })
 
+
+
+document.getElementById("input-pin").length=4;
 </script>
 
 </body>
